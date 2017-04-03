@@ -1,4 +1,4 @@
-function Y = byte_sub(S)
+function Y = byte_sub(S,sentido)
 
 %criando a tabela S-box
 a = ['63' '7C' '77' '7B' 'F2' '6B' '6F' 'C5' '30' '01' '67' '2B' 'FE' 'D7' 'AB' '76';
@@ -18,15 +18,37 @@ a = ['63' '7C' '77' '7B' 'F2' '6B' '6F' 'C5' '30' '01' '67' '2B' 'FE' 'D7' 'AB' 
      'E1' 'F8' '98' '11' '69' 'D9' '8E' '94' '9B' '1E' '87' 'E9' 'CE' '55' '28' 'DF';
      '8C' 'A1' '89' '0D' 'BF' 'E6' '42' '68' '41' '99' '2D' '0F' 'B0' '54' 'BB' '16'];
      
+b = ['52096AD53036A538BF40A39E81F3D7FB';
+     '7CE339829B2FFF87348E4344C4DEE9CB';
+     '547B9432A6C2233DEE4C950B42FAC34E';
+     '082EA16628D924B2765BA2496D8BD125';
+     '72F8F66486689816D4A45CCC5D65B692';
+     '6C704850FDEDB9DA5E9D4657A78D9D84';
+     '90D8AB008CBCD30AF7E45805B8B34506';
+     'D02C1E8FCA3F0F02C1AFBD0301138A6B';
+     '3A9111414F67DCEA97F2CFCEF0B4E673';
+     '96AC7422E7AD3585E2F937E81C75DF6E';
+     '47F11A711D29C5896FB7620EAA18BE1B';
+     'FC563E4BC6D279209ADBC0FE78CD5AF4';
+     '52DDA8338807C731B11210592780EC5F';
+     '60517FA919B54A0D2DE57A9F93C99CEF';
+     'A0E03B4DAE2AF5B0C8EBBB3C83539961';
+     '172B047EBA77D626E169146355210C7D'];
 
 %Abaixo pega o indice a partir da string, e obtem um vetor Y com os valores trocados a partir da tabela.
-Y = [];
-for t = 0:(length(S)/2 - 1)
 
-  i = [S(2*t+1);S(2*t+2)];
-  i = hex2dec(i);
-  j(1) = i(1) + 1;
-  j(2) = 2.*i(2) + 1;
-  Y = [Y a(j(1),j(2):j(2) + 1)];
-  
+Y = [];
+if (sentido ==0)
+  a = b;
 end
+
+  for t = 0:(length(S)/2 - 1)
+
+    i = [S(2*t+1);S(2*t+2)];
+    i = hex2dec(i);
+    j(1) = i(1) + 1;
+    j(2) = 2.*i(2) + 1;
+    Y = [Y a(j(1),j(2):j(2) + 1)];
+    
+  
+  end
