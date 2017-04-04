@@ -1,4 +1,5 @@
 function Y = byte_sub(S,sentido)
+%saida em decimal
 
 %criando a tabela S-box
 a = ['63' '7C' '77' '7B' 'F2' '6B' '6F' 'C5' '30' '01' '67' '2B' 'FE' 'D7' 'AB' '76';
@@ -37,18 +38,8 @@ b = ['52096AD53036A538BF40A39E81F3D7FB';
 
 %Abaixo pega o indice a partir da string, e obtem um vetor Y com os valores trocados a partir da tabela.
 
-Y = [];
 if (sentido ==0)
   a = b;
 end
 
-  for t = 0:(length(S)/2 - 1)
-
-    i = [S(2*t+1);S(2*t+2)];
-    i = hex2dec(i);
-    j(1) = i(1) + 1;
-    j(2) = 2.*i(2) + 1;
-    Y = [Y a(j(1),j(2):j(2) + 1)];
-    
-  
-  end
+  Y = pega_tabela(S,a);
